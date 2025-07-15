@@ -1,6 +1,7 @@
 ﻿using LibraryMgtApiDomain.Repositories;
 using LibraryMgtApiInfrastructure.DataAccess;
 using LibraryMgtApiInfrastructure.Repositories;
+using LibraryMgtApiInfrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +22,10 @@ namespace LibraryMgtApiInfrastructure.Extensions
             });
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<ILibraryMgtSeeder, LibraryMgtSeeder>();
+
+
         }
     }
 }

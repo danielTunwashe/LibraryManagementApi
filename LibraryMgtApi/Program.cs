@@ -1,5 +1,7 @@
 using LibraryMgtApiApplication.Extensions;
+using LibraryMgtApiApplication.Middlewares;
 using LibraryMgtApiInfrastructure.Extensions;
+using LibraryMgtApiInfrastructure.Seeders;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +14,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+//For the seedeer
+var scope = app.Services.CreateScope();
+var seeder = scope.ServiceProvider.GetRequiredService<ILibraryMgtSeeder>();
+await seeder.seed();
+
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
