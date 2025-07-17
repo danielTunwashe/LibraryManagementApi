@@ -22,6 +22,11 @@ namespace LibraryMgtApiInfrastructure.Repositories
             return userProfile;
         }
 
+        public async Task Delete(UserProfile profile)
+        {
+            _context.userProfiles.Remove(profile);
+            await _context.SaveChangesAsync();
+        }
 
         public async Task<IEnumerable<UserProfile>> GetAll()
         {

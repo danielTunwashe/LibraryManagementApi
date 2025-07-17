@@ -23,6 +23,7 @@ namespace LibraryMgtApiInfrastructure.Extensions
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<ILibraryMgtSeeder, LibraryMgtSeeder>();
 
 

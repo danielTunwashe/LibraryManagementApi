@@ -1,5 +1,6 @@
 ﻿using LibraryMgtApiApplication.UxarProfile.Commands.CreateProfile;
 using LibraryMgtApiApplication.UxarProfile.Commands.UpdateProfile;
+using LibraryMgtApiApplication.UxarProfile.Queries.DeleteUserProfile;
 using LibraryMgtApiApplication.UxarProfile.Queries.GetAllUsersProfile;
 using LibraryMgtApiApplication.UxarProfile.Queries.GetUsersProfileById;
 using MediatR;
@@ -49,6 +50,14 @@ namespace LibraryMgtApi.Controllers
         {
             command.Id = id;
             await _mediator.Send(command);
+            return NoContent();
+        }
+
+
+        [HttpDelete("DeleteUserProfile/{id}")]
+        public async Task<IActionResult> DeleteUserProfile([FromRoute] int id)
+        {
+            await _mediator.Send(new DeleteUserProfileQuery(id));
             return NoContent();
         }
 
