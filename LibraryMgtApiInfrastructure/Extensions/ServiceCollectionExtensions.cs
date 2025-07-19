@@ -24,6 +24,8 @@ namespace LibraryMgtApiInfrastructure.Extensions
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IGenreRepository, GenreRepository>();
             services.AddScoped<ILibraryMgtSeeder, LibraryMgtSeeder>();
 
 

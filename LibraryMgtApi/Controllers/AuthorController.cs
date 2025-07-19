@@ -1,4 +1,5 @@
 ﻿using LibraryMgtApiApplication.Authors.Commands.CreateAuthor;
+using LibraryMgtApiApplication.Authors.Queries.DeleteAuthor;
 using LibraryMgtApiApplication.Authors.Queries.GetAllAuthors;
 using LibraryMgtApiApplication.Authors.Queries.GetAuthorById;
 using LibraryMgtApiApplication.Authors.Queries.UpdateAuthor;
@@ -49,6 +50,14 @@ namespace LibraryMgtApi.Controllers
             var author = await _mediator.Send(command);
             return Ok(author);
         }
+
+        [HttpDelete("DeleteAuthorById/{id}")]
+        public async Task<IActionResult> DeleteAuthor([FromRoute] int id)
+        {
+            await _mediator.Send(new DeleteAuthorCommandQuery(id));
+            return NoContent();
+        }
+
 
     }
 }

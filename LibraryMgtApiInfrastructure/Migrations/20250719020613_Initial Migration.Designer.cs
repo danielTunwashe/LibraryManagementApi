@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryMgtApiInfrastructure.Migrations
 {
     [DbContext(typeof(LibraryMgtDbContext))]
-    [Migration("20250713005848_Initial Migration")]
+    [Migration("20250719020613_Initial Migration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace LibraryMgtApiInfrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.Author", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.Author", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -46,7 +46,7 @@ namespace LibraryMgtApiInfrastructure.Migrations
                     b.ToTable("authors");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.Book", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.Book", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -68,10 +68,10 @@ namespace LibraryMgtApiInfrastructure.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.ToTable("Book");
+                    b.ToTable("books");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.BookGenre", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.BookGenre", b =>
                 {
                     b.Property<int>("BookId")
                         .HasColumnType("int");
@@ -86,7 +86,7 @@ namespace LibraryMgtApiInfrastructure.Migrations
                     b.ToTable("bookGenres");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.Genre", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.Genre", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,7 +103,7 @@ namespace LibraryMgtApiInfrastructure.Migrations
                     b.ToTable("genres");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.User", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -124,7 +124,7 @@ namespace LibraryMgtApiInfrastructure.Migrations
                     b.ToTable("users");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.UserProfile", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.UserProfile", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,9 +151,9 @@ namespace LibraryMgtApiInfrastructure.Migrations
                     b.ToTable("userProfiles");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.Book", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.Book", b =>
                 {
-                    b.HasOne("LibraryMgtApiInfrastructure.Entities.Author", "Author")
+                    b.HasOne("LibraryMgtApiDomain.Entities.Author", "Author")
                         .WithMany("Books")
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -162,15 +162,15 @@ namespace LibraryMgtApiInfrastructure.Migrations
                     b.Navigation("Author");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.BookGenre", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.BookGenre", b =>
                 {
-                    b.HasOne("LibraryMgtApiInfrastructure.Entities.Book", "Book")
+                    b.HasOne("LibraryMgtApiDomain.Entities.Book", "Book")
                         .WithMany("BookGenres")
                         .HasForeignKey("BookId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("LibraryMgtApiInfrastructure.Entities.Genre", "Genre")
+                    b.HasOne("LibraryMgtApiDomain.Entities.Genre", "Genre")
                         .WithMany("BookGenres")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -181,33 +181,33 @@ namespace LibraryMgtApiInfrastructure.Migrations
                     b.Navigation("Genre");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.UserProfile", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.UserProfile", b =>
                 {
-                    b.HasOne("LibraryMgtApiInfrastructure.Entities.User", "User")
+                    b.HasOne("LibraryMgtApiDomain.Entities.User", "User")
                         .WithOne("Profile")
-                        .HasForeignKey("LibraryMgtApiInfrastructure.Entities.UserProfile", "UserId")
+                        .HasForeignKey("LibraryMgtApiDomain.Entities.UserProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.Author", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.Author", b =>
                 {
                     b.Navigation("Books");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.Book", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.Book", b =>
                 {
                     b.Navigation("BookGenres");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.Genre", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.Genre", b =>
                 {
                     b.Navigation("BookGenres");
                 });
 
-            modelBuilder.Entity("LibraryMgtApiInfrastructure.Entities.User", b =>
+            modelBuilder.Entity("LibraryMgtApiDomain.Entities.User", b =>
                 {
                     b.Navigation("Profile")
                         .IsRequired();

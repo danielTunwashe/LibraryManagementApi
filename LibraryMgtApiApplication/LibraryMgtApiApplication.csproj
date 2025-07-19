@@ -23,4 +23,8 @@
     <ProjectReference Include="..\LibraryMgtApiDomain\LibraryMgtApiDomain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Genreses\Commands\" />
+  </ItemGroup>
+
 </Project>

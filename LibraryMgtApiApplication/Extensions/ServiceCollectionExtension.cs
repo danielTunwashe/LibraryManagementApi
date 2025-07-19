@@ -1,6 +1,7 @@
 ﻿
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using LibraryMgtApiApplication.Middlewares;
 using LibraryMgtApiDomain.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -15,6 +16,9 @@ namespace LibraryMgtApiApplication.Extensions
             services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(applicationAssembly));
 
             services.AddAutoMapper(applicationAssembly);
+
+            services.AddTransient<ErrorHandlingMiddleware>();
+
 
             services.AddValidatorsFromAssembly(applicationAssembly).AddFluentValidationAutoValidation();
 

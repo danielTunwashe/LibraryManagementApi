@@ -21,6 +21,12 @@ namespace LibraryMgtApiInfrastructure.Repositories
             return createdAuthor.Entity;
         }
 
+        public async Task Delete(Author author)
+        {
+            _context.authors.Remove(author);
+            await _context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<Author>> GetAll()
         {
             var authors = await _context.authors.ToListAsync();

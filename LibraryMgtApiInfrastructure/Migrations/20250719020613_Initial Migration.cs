@@ -53,7 +53,7 @@ namespace LibraryMgtApiInfrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Book",
+                name: "books",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -64,9 +64,9 @@ namespace LibraryMgtApiInfrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Book", x => x.Id);
+                    table.PrimaryKey("PK_books", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Book_authors_AuthorId",
+                        name: "FK_books_authors_AuthorId",
                         column: x => x.AuthorId,
                         principalTable: "authors",
                         principalColumn: "Id",
@@ -105,9 +105,9 @@ namespace LibraryMgtApiInfrastructure.Migrations
                 {
                     table.PrimaryKey("PK_bookGenres", x => new { x.BookId, x.GenreId });
                     table.ForeignKey(
-                        name: "FK_bookGenres_Book_BookId",
+                        name: "FK_bookGenres_books_BookId",
                         column: x => x.BookId,
-                        principalTable: "Book",
+                        principalTable: "books",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -119,14 +119,14 @@ namespace LibraryMgtApiInfrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Book_AuthorId",
-                table: "Book",
-                column: "AuthorId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_bookGenres_GenreId",
                 table: "bookGenres",
                 column: "GenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_books_AuthorId",
+                table: "books",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_userProfiles_UserId",
@@ -145,7 +145,7 @@ namespace LibraryMgtApiInfrastructure.Migrations
                 name: "userProfiles");
 
             migrationBuilder.DropTable(
-                name: "Book");
+                name: "books");
 
             migrationBuilder.DropTable(
                 name: "genres");

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using LibraryMgtApiApplication.AuthorBooks.Commands.CreateNewBookForAuthor;
+using LibraryMgtApiApplication.AuthorBooks.Commands.UpdateBookByIdForAuthor;
 using LibraryMgtApiApplication.Authors.Commands.CreateAuthor;
 using LibraryMgtApiApplication.Authors.Queries.UpdateAuthor;
 using LibraryMgtApiApplication.Uxar.Commands.CreateUser;
@@ -24,6 +26,10 @@ namespace LibraryMgtApiApplication.Dto
             CreateMap<Author, GetAuthorByIdResponseDto>();
             CreateMap<Book, GetAuthorByIdBookResponseDto>();
             CreateMap<BookGenre, GetAuthorByIdBookGenreResponseDto>();
+            CreateMap<Book, CreateNewBookForAuthorResponseDto>();
+            CreateMap<BookGenre, BookGenreDto>();
+            CreateMap<Book, GetBookByIdForAuthorResponseDto>();
+            CreateMap<Genre, GenreResponseDto>();
 
 
 
@@ -34,6 +40,8 @@ namespace LibraryMgtApiApplication.Dto
             CreateMap<UpdateUserProfileCommand, UserProfile>();
             CreateMap<CreateAuthorCommand, Author>();
             CreateMap<UpdateAuthorCommand, Author>();
+            CreateMap<CreateNewBookForAuthorCommand, Book>();
+            CreateMap<UpdateBookByIdForAuthorCommand, Book>();
 
         }
     }

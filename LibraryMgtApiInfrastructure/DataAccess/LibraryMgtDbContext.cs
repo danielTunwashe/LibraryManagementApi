@@ -21,6 +21,7 @@ namespace LibraryMgtApiInfrastructure.DataAccess
         public DbSet<Author> authors { get; set; }
         public DbSet<Genre> genres { get; set; }
         public DbSet<BookGenre> bookGenres { get; set; }
+        public DbSet<Book> books { get; set; }
 
 
         //is like your blueprint configuration method for defining how your C# classes map to SQL tables
