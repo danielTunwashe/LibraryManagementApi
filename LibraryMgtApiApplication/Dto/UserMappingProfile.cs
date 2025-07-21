@@ -30,6 +30,9 @@ namespace LibraryMgtApiApplication.Dto
             CreateMap<BookGenre, BookGenreDto>();
             CreateMap<Book, GetBookByIdForAuthorResponseDto>();
             CreateMap<Genre, GenreResponseDto>();
+            CreateMap<Author, AuthorDto>();
+            CreateMap<Book, filteredBookResponseDto>();
+            CreateMap<Book, GetAllListOfBooksForAuthorResponseDto>();
 
 
 

@@ -8,6 +8,7 @@ namespace LibraryMgtApiDomain.Repositories
         Task Delete(Author author);
         Task <IEnumerable<Author>> GetAll();
         Task <Author> GetById(int id);
+        Task<Author?> GetByName(string authorName);
         Task <Author> Update(Author author);
     }
 }

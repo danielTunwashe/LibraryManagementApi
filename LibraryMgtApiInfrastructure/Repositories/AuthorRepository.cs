@@ -43,6 +43,12 @@ namespace LibraryMgtApiInfrastructure.Repositories
             return author;
         }
 
+        public async Task<Author?> GetByName(string authorName)
+        {
+            var author = await _context.authors.Include(a => a.Books).FirstOrDefaultAsync(a => a.Name == authorName);
+            return author;
+        }
+
         public async Task<Author> Update(Author author)
         {
             var updatedAuthor = _context.authors.Update(author);
