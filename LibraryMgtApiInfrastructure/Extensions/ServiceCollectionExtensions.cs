@@ -1,4 +1,5 @@
-﻿using LibraryMgtApiDomain.Repositories;
+﻿using LibraryMgtApiDomain.CustomEmailEntity;
+using LibraryMgtApiDomain.Repositories;
 using LibraryMgtApiInfrastructure.DataAccess;
 using LibraryMgtApiInfrastructure.Repositories;
 using LibraryMgtApiInfrastructure.Seeders;
@@ -21,12 +22,19 @@ namespace LibraryMgtApiInfrastructure.Extensions
                 options.UseSqlServer(connectionString).EnableSensitiveDataLogging();
             });
 
+            //Binds and loads the mail settings in the app.json file to the class EmailSettings when the app loads so that
+            //it can be used by the services injecting it as _emailSettings
+            services.Configure<EmailSettings>(
+            configuration.GetSection("EmailSettings"));
+
+
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
+            services.AddTransient<IMailRepository, MailRepository>();
             services.AddScoped<ILibraryMgtSeeder, LibraryMgtSeeder>();
 
         }

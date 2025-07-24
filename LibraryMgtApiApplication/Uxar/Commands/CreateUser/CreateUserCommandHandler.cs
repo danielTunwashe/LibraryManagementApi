@@ -12,11 +12,13 @@ namespace LibraryMgtApiApplication.Uxar.Commands.CreateUser
         private readonly IMapper _mapper;
         private readonly IUserRepository _userRepository;
         private readonly ILogger<CreateUserCommandHandler> _logger;
-        public CreateUserCommandHandler(IMapper mapper, IUserRepository userRepository, ILogger<CreateUserCommandHandler> logger)
+        private readonly IMailRepository _mailRepository;
+        public CreateUserCommandHandler(IMapper mapper, IUserRepository userRepository, ILogger<CreateUserCommandHandler> logger, IMailRepository mailRepository)
         {
             _mapper = mapper;
             _userRepository = userRepository;
             _logger = logger;
+            _mailRepository = mailRepository;
         }
 
         async Task<CreateUserResponseDto> IRequestHandler<CreateUserCommand, CreateUserResponseDto>.Handle(CreateUserCommand request, CancellationToken cancellationToken)
@@ -29,6 +31,8 @@ namespace LibraryMgtApiApplication.Uxar.Commands.CreateUser
             var user = await _userRepository.Create(mappedUser);  
             //
             var newMappedUser = _mapper.Map<CreateUserResponseDto>(mappedUser);
+
+            await _mailRepository.SendEmailAsync(request.Email, request.Username, "Welcome to Library Mgt System – Your Account Is Ready!");
 
             return newMappedUser;
         }
