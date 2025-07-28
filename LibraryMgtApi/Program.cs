@@ -1,5 +1,6 @@
-using LibraryMgtApiApplication.Extensions;
+﻿using LibraryMgtApiApplication.Extensions;
 using LibraryMgtApiApplication.Middlewares;
+using LibraryMgtApiDomain.Entities;
 using LibraryMgtApiInfrastructure.Extensions;
 using LibraryMgtApiInfrastructure.Seeders;
 
@@ -12,6 +13,25 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+    {
+        policy
+            .WithOrigins("http://127.0.0.1:5594") // 👈 your test HTML origin
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials(); // 👈 important for SignalR
+    });
+});
+
+
+
+
+//Because we have signalR dependency installed in the Domain Layer
+builder.Services.AddSignalR();
 
 var app = builder.Build();
 
@@ -28,6 +48,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
+
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.UseMiddleware<ErrorHandlingMiddleware>();
 

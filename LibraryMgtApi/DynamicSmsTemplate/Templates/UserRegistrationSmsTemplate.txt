@@ -1,0 +1,2 @@
+﻿Hello {{Username}}, your Library Mgt System account has been created successfully. 
+Welcome aboard! You can now log in using your registered email: {{Email}}.

@@ -4,6 +4,7 @@ using LibraryMgtApiInfrastructure.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryMgtApiInfrastructure.Migrations
 {
     [DbContext(typeof(LibraryMgtDbContext))]
-    partial class LibraryMgtDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250725231016_Added Phone Number to the User class..")]
+    partial class AddedPhoneNumbertotheUserclass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

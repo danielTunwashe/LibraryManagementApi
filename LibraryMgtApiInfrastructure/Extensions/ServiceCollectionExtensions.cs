@@ -1,4 +1,5 @@
 ﻿using LibraryMgtApiDomain.CustomEmailEntity;
+using LibraryMgtApiDomain.CustomSmsEntity;
 using LibraryMgtApiDomain.Repositories;
 using LibraryMgtApiInfrastructure.DataAccess;
 using LibraryMgtApiInfrastructure.Repositories;
@@ -26,15 +27,21 @@ namespace LibraryMgtApiInfrastructure.Extensions
             //it can be used by the services injecting it as _emailSettings
             services.Configure<EmailSettings>(
             configuration.GetSection("EmailSettings"));
+            services.AddTransient<IMailRepository, MailRepository>();
 
+            //Same for Sms..
+            services.Configure<SmsSettings>(configuration.GetSection("SmsSettings"));
+            services.AddHttpClient<ISmsRepository, SmsRepository>();
 
+            //For Notification
+            services.AddSignalR();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IUserProfileRepository, UserProfileRepository>();
             services.AddScoped<IAuthorRepository, AuthorRepository>();
             services.AddScoped<IBookRepository, BookRepository>();
             services.AddScoped<IGenreRepository, GenreRepository>();
-            services.AddTransient<IMailRepository, MailRepository>();
             services.AddScoped<ILibraryMgtSeeder, LibraryMgtSeeder>();
 
         }
